@@ -16,7 +16,7 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@main
       - name: 'docker login'
-        run: docker login -u  17032021 -p vital_docker
+        run: docker login -u  17032021 -p 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
       - name: "Build"
         run: docker build -t 17032012/diplom:latest .
       - name: "Push"
