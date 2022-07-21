@@ -27,4 +27,4 @@ jobs:
       - name: "Build"
         run: docker build -t 17032012/diplom:latest .
       - name: "Push"
-        run: docker push 17032012/diplom:latest .
+        run: docker push 17032012/diplom:latest
