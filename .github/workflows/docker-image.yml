@@ -29,15 +29,20 @@ jobs:
       - name: "Push"
         run: docker push 17032012/diplom:latest
 
-      - name: Post Deploy
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.REMOTE_HOST_PROD }}
-            username: ${{ secrets.REMOTE_USER_PROD }}
-            key: ${{ secrets.SSH_PRIVATE_KEY_PROD }}
-            port: 22
-            script: | 
-                   touch 1.txt ;
 
 
+       
+      - name: Deploy in EC2
+       # uses: actions/checkout@v2
+        env:
+            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.HOSTNAME  }}
+            USER_NAME : ${{ secrets.USER_NAME  }}
+            
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          
+            #Now we have got the access of EC2 and we will start the deploy .
+           touch1.txt
 
