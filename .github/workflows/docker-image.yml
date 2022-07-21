@@ -15,8 +15,15 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@main
-      - name: 'docker login'
-        run: echo docker_vital | docker login -u 17032021 --password-stdin
+     # - name: 'docker login'
+     #   run: echo docker_vital | docker login -u 17032021 --password-stdin
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
       - name: "Build"
         run: docker build -t 17032012/diplom:latest .
       - name: "Push"
